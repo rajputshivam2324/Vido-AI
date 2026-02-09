@@ -520,9 +520,9 @@ const ChatInterface = () => {
                             remarkPlugins={[remarkGfm]}
                             components={{
                               // Style headings
-                              h1: ({ node: _node, ...props }) => <h1 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px', color: '#f5f5f5', letterSpacing: '-0.01em' }} {...props} />,
-                              h2: ({ node: _node, ...props }) => <h2 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '12px', marginTop: '24px', color: '#f0f0f0', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '6px' }} {...props} />,
-                              h3: ({ node: _node, ...props }) => <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '10px', marginTop: '20px', color: '#dcdcdc' }} {...props} />,
+                              h1: ({ children }) => <h1 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px', color: '#f5f5f5', letterSpacing: '-0.01em' }}>{children}</h1>,
+                              h2: ({ children }) => <h2 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '12px', marginTop: '24px', color: '#f0f0f0', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '6px' }}>{children}</h2>,
+                              h3: ({ children }) => <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '10px', marginTop: '20px', color: '#dcdcdc' }}>{children}</h3>,
                               // Style paragraphs
                               p: ({ node, ...props }) => <p style={{ marginBottom: '16px', lineHeight: '1.7', color: '#cfcfcf' }} {...props} />,
                               // Style lists
@@ -540,7 +540,7 @@ const ChatInterface = () => {
                               // Style blockquotes
                               blockquote: ({ node, ...props }) => <blockquote style={{ borderLeft: '2px solid rgba(255, 255, 255, 0.15)', paddingLeft: '16px', margin: '16px 0', color: '#bdbdbd', fontStyle: 'italic' }} {...props} />,
                               // Style links
-                              a: ({ node: _node, ...props }) => <a style={{ color: '#f5f5f5', textDecoration: 'underline', textUnderlineOffset: '3px' }} target="_blank" rel="noopener noreferrer" {...props} />,
+                              a: ({ children, href }) => <a href={href} style={{ color: '#f5f5f5', textDecoration: 'underline', textUnderlineOffset: '3px' }} target="_blank" rel="noopener noreferrer">{children}</a>,
                               // Style strong and emphasis
                               strong: ({ node, ...props }) => <strong style={{ color: '#ffffff', fontWeight: 700 }} {...props} />,
                               em: ({ node, ...props }) => <em style={{ fontStyle: 'italic', color: '#dcdcdc' }} {...props} />,
