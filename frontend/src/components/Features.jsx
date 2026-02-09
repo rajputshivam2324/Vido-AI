@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiZap, FiCode, FiLock, FiMessageSquare, FiYoutube, FiGlobe } from 'react-icons/fi';
+import { FiZap, FiLock, FiYoutube } from 'react-icons/fi';
 
 const features = [
   {

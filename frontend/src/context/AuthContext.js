@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { googleLogout } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -11,6 +11,15 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('googleCredential') || null);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+
+    const logout = useCallback(() => {
+        googleLogout();
+        localStorage.removeItem('googleCredential');
+        localStorage.removeItem('googleUserInfo');
+        setToken(null);
+        setUser(null);
+        navigate('/');
+    }, [navigate]);
 
     useEffect(() => {
         // Clear any legacy invalid tokens
@@ -41,7 +50,9 @@ export const AuthProvider = ({ children }) => {
             }
         }
         setIsLoading(false);
-    }, []);
+    }, [logout]);
+
+
 
     const loginWithGoogle = (credential) => {
         try {
@@ -71,14 +82,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const logout = () => {
-        googleLogout();
-        localStorage.removeItem('googleCredential');
-        localStorage.removeItem('googleUserInfo');
-        setToken(null);
-        setUser(null);
-        navigate('/');
-    };
+
 
     return (
         <AuthContext.Provider value={{ user, token, isLoading, loginWithGoogle, logout }}>

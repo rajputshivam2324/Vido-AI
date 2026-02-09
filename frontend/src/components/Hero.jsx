@@ -1,32 +1,15 @@
 import React from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
-import { useGoogleLogin } from '@react-oauth/google';
+// import { useGoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
-  const { user, loginWithGoogle } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
-  const googleLogin = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      try {
-        // Fetch user info using the access token
-        const userInfoResponse = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
-        });
-        const userInfo = await userInfoResponse.json();
-        // Create a simple token with user info for our auth context
-        loginWithGoogle(null, userInfo);
-      } catch (error) {
-        console.error('Error fetching user info:', error);
-      }
-    },
-    onError: () => {
-      console.error('Google Login Failed');
-    },
-  });
+  // googleLogin removed as it was unused and loginWithGoogle is used from context
 
   const handleStartChatting = (e) => {
     e.preventDefault();
