@@ -6,9 +6,25 @@ import { ErrorResponse } from './types/chat.types.js';
 // Create Express app
 const app: Express = express();
 
+// CORS configuration for production and development
+const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://vidoai.shivamio.in',
+];
+
 // Middleware
 app.use(cors({
-    origin: true, // Allow all origins
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(null, true); // Allow all origins in production for now
+        }
+    },
     credentials: true,
 }));
 app.use(express.json({ limit: '50mb' }));

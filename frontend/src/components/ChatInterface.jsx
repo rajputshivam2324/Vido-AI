@@ -8,7 +8,7 @@ const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (typeof window !== 'undefined' && window.location.hostname === 'localhost'
     ? 'http://localhost:3005'
-    : 'https://ytchatbot-3.onrender.com');
+    : 'https://vido-ai.onrender.com');
 
 // const getModelEndpoint = (path) => `${API_BASE_URL}${path}`; // Unused if only using ytchatbot
 
