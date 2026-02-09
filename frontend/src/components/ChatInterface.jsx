@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 // Use consistent API base URL for all backend requests
 const API_BASE_URL =
@@ -16,19 +15,19 @@ const API_BASE_URL =
 const ChatInterface = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
-  const [selectedModel] = useState('ytchatbot'); // Constant model
+  useState('ytchatbot'); // Constant model - value not used, just initializing state
   const [showUrlModal, setShowUrlModal] = useState(false);
   const [tempVideoUrl, setTempVideoUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState(`session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
   const [videoUrl, setVideoUrl] = useState('');
   const [currentVideoUrl, setCurrentVideoUrl] = useState(''); // Track the video URL being used for current session
-  const [transcriptId, setTranscriptId] = useState(''); // Store transcriptId for the current video
+  const [, setTranscriptId] = useState(''); // Store transcriptId for the current video
   const [chatTitle, setChatTitle] = useState('New Chat'); // Track the current chat title
 
   const { user, token, logout } = useAuth();
   const [chatHistory, setChatHistory] = useState([]);
-  const navigate = useNavigate();
+
 
   const messagesEndRef = useRef(null);
 
@@ -521,9 +520,9 @@ const ChatInterface = () => {
                             remarkPlugins={[remarkGfm]}
                             components={{
                               // Style headings
-                              h1: ({ node, ...props }) => <h1 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px', color: '#f5f5f5', letterSpacing: '-0.01em' }} {...props} />,
-                              h2: ({ node, ...props }) => <h2 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '12px', marginTop: '24px', color: '#f0f0f0', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '6px' }} {...props} />,
-                              h3: ({ node, ...props }) => <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '10px', marginTop: '20px', color: '#dcdcdc' }} {...props} />,
+                              h1: ({ node: _node, ...props }) => <h1 style={{ fontSize: '32px', fontWeight: 800, marginBottom: '20px', color: '#f5f5f5', letterSpacing: '-0.01em' }} {...props} />,
+                              h2: ({ node: _node, ...props }) => <h2 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '12px', marginTop: '24px', color: '#f0f0f0', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '6px' }} {...props} />,
+                              h3: ({ node: _node, ...props }) => <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '10px', marginTop: '20px', color: '#dcdcdc' }} {...props} />,
                               // Style paragraphs
                               p: ({ node, ...props }) => <p style={{ marginBottom: '16px', lineHeight: '1.7', color: '#cfcfcf' }} {...props} />,
                               // Style lists
@@ -541,7 +540,7 @@ const ChatInterface = () => {
                               // Style blockquotes
                               blockquote: ({ node, ...props }) => <blockquote style={{ borderLeft: '2px solid rgba(255, 255, 255, 0.15)', paddingLeft: '16px', margin: '16px 0', color: '#bdbdbd', fontStyle: 'italic' }} {...props} />,
                               // Style links
-                              a: ({ node, ...props }) => <a style={{ color: '#f5f5f5', textDecoration: 'underline', textUnderlineOffset: '3px' }} target="_blank" rel="noopener noreferrer" {...props} />,
+                              a: ({ node: _node, ...props }) => <a style={{ color: '#f5f5f5', textDecoration: 'underline', textUnderlineOffset: '3px' }} target="_blank" rel="noopener noreferrer" {...props} />,
                               // Style strong and emphasis
                               strong: ({ node, ...props }) => <strong style={{ color: '#ffffff', fontWeight: 700 }} {...props} />,
                               em: ({ node, ...props }) => <em style={{ fontStyle: 'italic', color: '#dcdcdc' }} {...props} />,
